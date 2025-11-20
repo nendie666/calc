@@ -1,0 +1,60 @@
+Screen:
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 20
+
+        MDLabel:
+            text: "Коммунальные услуги"
+            halign: "center"
+            font_style: "H5"
+
+        # --- ВОТ ПОЛЕ ХОЛОДНОЙ ВОДЫ, КОТОРОЕ ВЫ ПРОПУСТИЛИ ---
+        MDTextField:
+            id: cold
+            hint_text: "Показание холодной воды"
+            text: str(app.readings.get("cold", ""))
+            on_text: app.update_reading("cold", self.text)
+        # ----------------------------------------------------
+
+        MDTextField:
+            id: hot
+            hint_text: "Показание горячей воды"
+            text: str(app.readings.get("hot", ""))
+            on_text: app.update_reading("hot", self.text)
+
+        MDTextField:
+            id: electricity
+            hint_text: "Показание электричества"
+            text: str(app.readings.get("electricity", ""))
+            on_text: app.update_reading("electricity", self.text)
+
+        MDLabel:
+            text: "Тарифы"
+            halign: "center"
+
+        MDTextField:
+            hint_text: "Тариф холодной воды"
+            text: str(app.tariffs.get("cold", ""))
+            on_text: app.update_tariff("cold", self.text)
+
+        MDTextField:
+            hint_text: "Тариф горячей воды"
+            text: str(app.tariffs.get("hot", ""))
+            on_text: app.update_tariff("hot", self.text)
+
+        MDTextField:
+            hint_text: "Тариф водоотведения"
+            text: str(app.tariffs.get("sewage", ""))
+            on_text: app.update_tariff("sewage", self.text)
+
+        MDTextField:
+            hint_text: "Тариф электричества"
+            text: str(app.tariffs.get("electricity", ""))
+            on_text: app.update_tariff("electricity", self.text)
+
+        MDRaisedButton:
+            text: "Рассчитать"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.calculate()
